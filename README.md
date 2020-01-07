@@ -1,57 +1,52 @@
-```cmake
-# Minimum requirement of CMake version : 3.0.0
-cmake_minimum_required(VERSION 3.0.0)
+# refined geometric approach for palette-based image decomposition
 
-#Project name and version number
-project(Project VERSION 0.1.0)
+Code for the paper "An improved Geometric Approach for Palette-based Image Decomposition and Recoloring"
 
-# Set the ROOT and subdirectory
-# you should put the CMakeList.txt in these file directories
-set(ROOT ${PROJECT_SOURCE_DIR})
-# 可执行文件输出路径
-set(EXECUTABLE_OUTPUT_PATH ${ROOT}/Bin)
-# 可执行文件输出路径，和上语句作用类似
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${ROOT}/Bin)
-# 生成的库文件输出路径
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${ROOT}/Lib)
-# 主要针对VS或者XCode之类的IDE,指定库文件路径
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${ROOT}/Lib)
-# 如果是debug模式，加后缀_d
-set(CMAKE_DEBUG_POSTFIX "_d")
-# 如果是release模式，加后缀_r
-set(CMAKE_RELEASE_POSTFIX "_r")
+## Requirements
 
-#Choose different compilation configurations according to VS compilation
-set(CMAKE_BUILD_POSTFIX "${CMAKE_RELEASE_POSTFIX}") 
+------
 
-# For lib source files
-add_subdirectory(${ROOT}/Src/Libs ${ROOT}/build/Libs)
-# For main file of the function apps
-add_subdirectory(${ROOT}/Src/Apps ${ROOT}/build/Apps)
+The following setup steps are developed and tested on MacOS High Sierra 10.13.6 and with minimum requirements of [CMake](<https://cmake.org/download/>) 3.12 and C++ 14 standard.
 
-# Judging platform environment
-if(CMAKE_SYSTEM_NAME MATCHES "Windows")
-    message(STATUS "Windows settings are processed here!")
-else()
-    message(STATUS "Linux/Unix compiler settings are processed here!") 
-    # Turn on c++ 11
-    set(CMAKE_CXX_STANDARD 11)  
-    set(CMAKE_CXX_STANDARD_REQUIRED ON)
+**Used Libs:** 
 
-    # Compile default settings, more settings can be selected in the cmake command
-    add_compile_options(-w)
-    add_compile_options(-m64)
-    add_compile_options(-lz)
-    add_compile_options(-std=c++11)
-endif()
+- [`opencv`](<https://github.com/opencv/opencv>)
+- [`nlopt`](<https://nlopt.readthedocs.io/en/latest/#download-and-installation>)
 
-#Output Messages for debug the Cmake
-message(STATUS "operation system is : ${CMAKE_SYSTEM}") 
-message(STATUS "current platform is : ${CMAKE_SYSTEM_NAME}")        
-message(STATUS "CMake version is : ${CMAKE_SYSTEM_VERSION}") 
-message(STATUS "The program main directory is : ${ROOT}")
+## Build with CMake
 
-# Current compiler
-message(STATUS "C compiler is : ${CMAKE_C_COMPILER}")
-message(STATUS "C++ compiler is : ${CMAKE_CXX_COMPILER}")   
+------
+
+```bash
+$ cd <palette-refine>
+$ cmake .
+$ make
 ```
+
+
+
+## Usage
+
+directly use a toy example
+
+```bash
+$ ./palette_refine
+```
+
+or
+
+```bash
+$./palette_refine [OPTION...] [pic] [obj] [prefix]
+
+  -p, --pic arg     original picture
+  -o, --obj arg     convex hull .obj
+  -f, --prefix arg  prefix
+  -s, --sample arg  number of samples
+  -c, --option arg  center point selection method
+  -r, --ratio arg   ratio between neighbor_point and random points
+  -l, --lambda arg  lambda
+  -i, --iter arg    number of iteration
+  -u, --unique arg  unique parent of a point
+  -h, --help        Print help
+```
+
