@@ -1,0 +1,3 @@
+/Users/yiliwang/Desktop/palette-refine/CMakeFiles/rebuild_cache.dir
+/Users/yiliwang/Desktop/palette-refine/CMakeFiles/edit_cache.dir
+/Users/yiliwang/Desktop/palette-refine/CMakeFiles/palette_refine.dir
