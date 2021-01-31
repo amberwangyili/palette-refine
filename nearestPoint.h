@@ -9,9 +9,8 @@ using namespace std;
 template <typename T> T clamp(const T& val, const T& val_min, const T& val_max)
 {
     T tmp = std::min(val, val_max);
-    tmp = std::max(val, val_min);
+    tmp = std::max(tmp, val_min);
     return tmp;
-
 }
 
 
